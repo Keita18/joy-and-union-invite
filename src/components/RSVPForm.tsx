@@ -37,7 +37,7 @@ const FloralDecor = () => (
     </svg>
   </>
 );
-
+const RSVPForm = () => {
   const [name, setName] = useState("");
   const [attending, setAttending] = useState<string>("");
   const [accompanied, setAccompanied] = useState<string>("");
