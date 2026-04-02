@@ -66,10 +66,11 @@ const RSVPForm = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-4 py-12">
-      <div className="w-full max-w-lg animate-fade-in-up">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4 py-12 relative overflow-hidden">
+      <FloralDecor />
+      <div className="w-full max-w-lg animate-fade-in-up relative z-10">
         <div className="text-center mb-10">
-          <Heart className="w-10 h-10 mx-auto text-gold mb-4" />
+          <Heart className="w-10 h-10 mx-auto text-primary mb-4" />
           <h1 className="font-display text-4xl font-bold text-foreground mb-2">RSVP</h1>
           <p className="text-muted-foreground">Confirmez votre présence</p>
         </div>
