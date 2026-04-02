@@ -8,6 +8,35 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "sonner";
 import { Heart, Send } from "lucide-react";
 
+const FloralDecor = () => (
+  <>
+    {/* Top-left rose */}
+    <svg className="absolute top-0 left-0 w-32 h-32 opacity-15 text-primary" viewBox="0 0 200 200" fill="currentColor">
+      <path d="M100 20c-20 0-40 15-50 35-15 30 0 60 20 75 10 8 20 12 30 12s20-4 30-12c20-15 35-45 20-75-10-20-30-35-50-35zm0 15c8 0 18 5 25 18 10 20 2 42-12 52-6 4-10 6-13 6s-7-2-13-6c-14-10-22-32-12-52 7-13 17-18 25-18z"/>
+      <ellipse cx="60" cy="160" rx="25" ry="8" transform="rotate(-30 60 160)"/>
+      <ellipse cx="140" cy="160" rx="25" ry="8" transform="rotate(30 140 160)"/>
+      <path d="M95 110c-5 20-15 50-35 70M105 110c5 20 15 50 35 70" stroke="currentColor" fill="none" strokeWidth="2"/>
+    </svg>
+    {/* Bottom-right rose */}
+    <svg className="absolute bottom-0 right-0 w-40 h-40 opacity-10 text-primary rotate-180" viewBox="0 0 200 200" fill="currentColor">
+      <path d="M100 20c-20 0-40 15-50 35-15 30 0 60 20 75 10 8 20 12 30 12s20-4 30-12c20-15 35-45 20-75-10-20-30-35-50-35zm0 15c8 0 18 5 25 18 10 20 2 42-12 52-6 4-10 6-13 6s-7-2-13-6c-14-10-22-32-12-52 7-13 17-18 25-18z"/>
+      <ellipse cx="60" cy="160" rx="25" ry="8" transform="rotate(-30 60 160)"/>
+      <ellipse cx="140" cy="160" rx="25" ry="8" transform="rotate(30 140 160)"/>
+    </svg>
+    {/* Top-right petals */}
+    <svg className="absolute top-10 right-4 w-20 h-20 opacity-10 text-rose-light" viewBox="0 0 100 100" fill="currentColor">
+      <ellipse cx="50" cy="30" rx="15" ry="25" transform="rotate(-20 50 30)"/>
+      <ellipse cx="65" cy="50" rx="15" ry="25" transform="rotate(30 65 50)"/>
+      <ellipse cx="35" cy="50" rx="15" ry="25" transform="rotate(-30 35 50)"/>
+    </svg>
+    {/* Bottom-left petals */}
+    <svg className="absolute bottom-20 left-4 w-24 h-24 opacity-10 text-primary" viewBox="0 0 100 100" fill="currentColor">
+      <ellipse cx="50" cy="30" rx="12" ry="22" transform="rotate(15 50 30)"/>
+      <ellipse cx="65" cy="55" rx="12" ry="22" transform="rotate(45 65 55)"/>
+      <ellipse cx="35" cy="55" rx="12" ry="22" transform="rotate(-45 35 55)"/>
+    </svg>
+  </>
+);
 const RSVPForm = () => {
   const [name, setName] = useState("");
   const [attending, setAttending] = useState<string>("");
@@ -48,9 +77,10 @@ const RSVPForm = () => {
 
   if (submitted) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background px-4">
-        <div className="text-center animate-fade-in-up max-w-md">
-          <Heart className="w-16 h-16 mx-auto text-gold mb-6" fill="hsl(var(--gold))" />
+      <div className="min-h-screen flex items-center justify-center bg-background px-4 relative overflow-hidden">
+        <FloralDecor />
+        <div className="text-center animate-fade-in-up max-w-md relative z-10">
+          <Heart className="w-16 h-16 mx-auto text-primary mb-6" fill="hsl(var(--rose))" />
           <h2 className="font-display text-3xl font-semibold text-foreground mb-4">
             Merci {name} !
           </h2>
@@ -65,10 +95,11 @@ const RSVPForm = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-4 py-12">
-      <div className="w-full max-w-lg animate-fade-in-up">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4 py-12 relative overflow-hidden">
+      <FloralDecor />
+      <div className="w-full max-w-lg animate-fade-in-up relative z-10">
         <div className="text-center mb-10">
-          <Heart className="w-10 h-10 mx-auto text-gold mb-4" />
+          <Heart className="w-10 h-10 mx-auto text-primary mb-4" />
           <h1 className="font-display text-4xl font-bold text-foreground mb-2">RSVP</h1>
           <p className="text-muted-foreground">Confirmez votre présence</p>
         </div>
@@ -96,11 +127,11 @@ const RSVPForm = () => {
               Seriez-vous des nôtres ? <span className="text-destructive">*</span>
             </Label>
             <RadioGroup value={attending} onValueChange={setAttending} className="flex gap-4">
-              <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-gold transition-colors flex-1">
+              <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-primary transition-colors flex-1">
                 <RadioGroupItem value="yes" id="yes" />
                 <Label htmlFor="yes" className="cursor-pointer text-foreground">Oui, avec plaisir ! 🎉</Label>
               </div>
-              <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-gold transition-colors flex-1">
+              <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-primary transition-colors flex-1">
                 <RadioGroupItem value="no" id="no" />
                 <Label htmlFor="no" className="cursor-pointer text-foreground">Non, malheureusement 😢</Label>
               </div>
@@ -112,11 +143,11 @@ const RSVPForm = () => {
             <div className="space-y-3 animate-fade-in-up">
               <Label className="text-foreground font-medium">Seriez-vous accompagné(e) ?</Label>
               <RadioGroup value={accompanied} onValueChange={setAccompanied} className="flex gap-4">
-                <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-gold transition-colors flex-1">
+                <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-primary transition-colors flex-1">
                   <RadioGroupItem value="yes" id="acc-yes" />
                   <Label htmlFor="acc-yes" className="cursor-pointer text-foreground">Oui</Label>
                 </div>
-                <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-gold transition-colors flex-1">
+                <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-primary transition-colors flex-1">
                   <RadioGroupItem value="no" id="acc-no" />
                   <Label htmlFor="acc-no" className="cursor-pointer text-foreground">Non</Label>
                 </div>
