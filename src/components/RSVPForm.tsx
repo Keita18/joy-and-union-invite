@@ -114,11 +114,11 @@ const RSVPForm = () => {
             <div className="space-y-3 animate-fade-in-up">
               <Label className="text-foreground font-medium">Seriez-vous accompagné(e) ?</Label>
               <RadioGroup value={accompanied} onValueChange={setAccompanied} className="flex gap-4">
-                <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-gold transition-colors flex-1">
+                <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-primary transition-colors flex-1">
                   <RadioGroupItem value="yes" id="acc-yes" />
                   <Label htmlFor="acc-yes" className="cursor-pointer text-foreground">Oui</Label>
                 </div>
-                <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-gold transition-colors flex-1">
+                <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-primary transition-colors flex-1">
                   <RadioGroupItem value="no" id="acc-no" />
                   <Label htmlFor="acc-no" className="cursor-pointer text-foreground">Non</Label>
                 </div>
