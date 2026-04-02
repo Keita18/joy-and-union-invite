@@ -48,9 +48,10 @@ const RSVPForm = () => {
 
   if (submitted) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background px-4">
-        <div className="text-center animate-fade-in-up max-w-md">
-          <Heart className="w-16 h-16 mx-auto text-gold mb-6" fill="hsl(var(--gold))" />
+      <div className="min-h-screen flex items-center justify-center bg-background px-4 relative overflow-hidden">
+        <FloralDecor />
+        <div className="text-center animate-fade-in-up max-w-md relative z-10">
+          <Heart className="w-16 h-16 mx-auto text-primary mb-6" fill="hsl(var(--rose))" />
           <h2 className="font-display text-3xl font-semibold text-foreground mb-4">
             Merci {name} !
           </h2>
