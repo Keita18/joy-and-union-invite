@@ -98,11 +98,11 @@ const RSVPForm = () => {
               Seriez-vous des nôtres ? <span className="text-destructive">*</span>
             </Label>
             <RadioGroup value={attending} onValueChange={setAttending} className="flex gap-4">
-              <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-gold transition-colors flex-1">
+              <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-primary transition-colors flex-1">
                 <RadioGroupItem value="yes" id="yes" />
                 <Label htmlFor="yes" className="cursor-pointer text-foreground">Oui, avec plaisir ! 🎉</Label>
               </div>
-              <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-gold transition-colors flex-1">
+              <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-primary transition-colors flex-1">
                 <RadioGroupItem value="no" id="no" />
                 <Label htmlFor="no" className="cursor-pointer text-foreground">Non, malheureusement 😢</Label>
               </div>
