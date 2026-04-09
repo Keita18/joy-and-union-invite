@@ -67,13 +67,9 @@ const Admin = () => {
 
   const attending = responses.filter((r) => r.attending);
   const notAttending = responses.filter((r) => !r.attending);
-  const totalGuests = attending.reduce((acc, r) => {
-    let count = 1;
-    if (r.accompanied && r.companion_names) {
-      count += r.companion_names.split(",").length;
-    }
-    return acc + count;
-  }, 0);
+  const couples = attending.filter((r) => r.accompanied);
+  const solos = attending.filter((r) => !r.accompanied);
+  const totalGuests = attending.reduce((acc, r) => acc + (r.accompanied ? 2 : 1), 0);
 
   if (!authenticated) {
     return (
