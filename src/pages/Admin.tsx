@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { Lock, Users, UserCheck, UserX, MessageSquare, LogOut } from "lucide-react";
+import { Lock, Users, UserCheck, UserX, MessageSquare, LogOut, Heart, User } from "lucide-react";
 
 interface GuestResponse {
   id: string;
@@ -67,13 +67,9 @@ const Admin = () => {
 
   const attending = responses.filter((r) => r.attending);
   const notAttending = responses.filter((r) => !r.attending);
-  const totalGuests = attending.reduce((acc, r) => {
-    let count = 1;
-    if (r.accompanied && r.companion_names) {
-      count += r.companion_names.split(",").length;
-    }
-    return acc + count;
-  }, 0);
+  const couples = attending.filter((r) => r.accompanied);
+  const solos = attending.filter((r) => !r.accompanied);
+  const totalGuests = attending.reduce((acc, r) => acc + (r.accompanied ? 2 : 1), 0);
 
   if (!authenticated) {
     return (
@@ -113,12 +109,12 @@ const Admin = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-8">
           <Card className="bg-card border-border">
             <CardContent className="pt-6 text-center">
-              <Users className="w-8 h-8 mx-auto text-gold mb-2" />
+              <Users className="w-8 h-8 mx-auto text-primary mb-2" />
               <p className="text-3xl font-bold text-foreground">{totalGuests}</p>
-              <p className="text-muted-foreground text-sm">Invités attendus</p>
+              <p className="text-muted-foreground text-sm">Total invités</p>
             </CardContent>
           </Card>
           <Card className="bg-card border-border">
@@ -135,6 +131,20 @@ const Admin = () => {
               <p className="text-muted-foreground text-sm">Absents</p>
             </CardContent>
           </Card>
+          <Card className="bg-card border-border">
+            <CardContent className="pt-6 text-center">
+              <Heart className="w-8 h-8 mx-auto text-pink-500 mb-2" />
+              <p className="text-3xl font-bold text-foreground">{couples.length}</p>
+              <p className="text-muted-foreground text-sm">En couple</p>
+            </CardContent>
+          </Card>
+          <Card className="bg-card border-border">
+            <CardContent className="pt-6 text-center">
+              <User className="w-8 h-8 mx-auto text-blue-500 mb-2" />
+              <p className="text-3xl font-bold text-foreground">{solos.length}</p>
+              <p className="text-muted-foreground text-sm">Seul(e)</p>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Responses */}
@@ -147,9 +157,16 @@ const Admin = () => {
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-lg font-display text-foreground">{r.name}</CardTitle>
-                    <Badge variant={r.attending ? "default" : "destructive"} className={r.attending ? "bg-green-600 text-green-50" : ""}>
-                      {r.attending ? "Présent" : "Absent"}
-                    </Badge>
+                    <div className="flex items-center gap-2">
+                      <Badge variant={r.attending ? "default" : "destructive"} className={r.attending ? "bg-green-600 text-green-50" : ""}>
+                        {r.attending ? "Présent" : "Absent"}
+                      </Badge>
+                      {r.attending && (
+                        <Badge variant="outline" className="text-xs">
+                          {r.accompanied ? "En couple 💕" : "Seul(e) 😉"}
+                        </Badge>
+                      )}
+                    </div>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-2">
