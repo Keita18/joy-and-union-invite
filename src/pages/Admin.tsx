@@ -157,9 +157,16 @@ const Admin = () => {
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-lg font-display text-foreground">{r.name}</CardTitle>
-                    <Badge variant={r.attending ? "default" : "destructive"} className={r.attending ? "bg-green-600 text-green-50" : ""}>
-                      {r.attending ? "Présent" : "Absent"}
-                    </Badge>
+                    <div className="flex items-center gap-2">
+                      <Badge variant={r.attending ? "default" : "destructive"} className={r.attending ? "bg-green-600 text-green-50" : ""}>
+                        {r.attending ? "Présent" : "Absent"}
+                      </Badge>
+                      {r.attending && (
+                        <Badge variant="outline" className="text-xs">
+                          {r.accompanied ? "En couple 💕" : "Seul(e) 😉"}
+                        </Badge>
+                      )}
+                    </div>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-2">
