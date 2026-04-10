@@ -43,6 +43,38 @@ const Admin = () => {
     setResponses([]);
   };
 
+  const handleDelete = async (id: string, name: string) => {
+    if (!confirm(`Supprimer la réponse de "${name}" ?`)) return;
+    const { error } = await supabase.from("guest_responses").delete().eq("id", id);
+    if (error) {
+      toast.error("Erreur lors de la suppression");
+    } else {
+      setResponses((prev) => prev.filter((r) => r.id !== id));
+      toast.success("Réponse supprimée");
+    }
+  };
+
+  const exportCSV = () => {
+    if (responses.length === 0) return;
+    const headers = ["Nom", "Présent", "Accompagné", "Accompagnateur(s)", "Message", "Date"];
+    const rows = responses.map((r) => [
+      r.name,
+      r.attending ? "Oui" : "Non",
+      r.accompanied ? "En couple" : "Seul(e)",
+      r.companion_names || "",
+      r.message || "",
+      new Date(r.created_at).toLocaleDateString("fr-FR"),
+    ]);
+    const csv = [headers, ...rows].map((row) => row.map((c) => `"${c.replace(/"/g, '""')}"`).join(",")).join("\n");
+    const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `invites_${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       if (data.session) setAuthenticated(true);
