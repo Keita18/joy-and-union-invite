@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { Lock, Users, UserCheck, UserX, MessageSquare, LogOut, Heart, User } from "lucide-react";
+import { Lock, Users, UserCheck, UserX, MessageSquare, LogOut, Heart, User, Download, Trash2 } from "lucide-react";
 
 interface GuestResponse {
   id: string;
