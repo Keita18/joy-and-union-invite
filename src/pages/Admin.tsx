@@ -203,6 +203,9 @@ const Admin = () => {
                           {r.accompanied ? "En couple 💕" : "Seul(e) 😉"}
                         </Badge>
                       )}
+                      <Button variant="ghost" size="icon" onClick={() => handleDelete(r.id, r.name)} className="h-8 w-8 text-destructive hover:text-destructive">
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
                     </div>
                   </div>
                 </CardHeader>
