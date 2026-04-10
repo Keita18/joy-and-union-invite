@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#faf7f2"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#g)" opacity="0.35"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e8dcc8"/>
+      <stop offset="1" stop-color="#f5efe6"/>
+    </linearGradient>
+  </defs>
+  <text
+    x="600"
+    y="300"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="72"
+    fill="#5c4a3a"
+  >
+    Joy &amp; Union
+  </text>
+  <text
+    x="600"
+    y="380"
+    text-anchor="middle"
+    font-family="system-ui, sans-serif"
+    font-size="28"
+    fill="#8a7a6a"
+  >
+    Invitation
+  </text>
+</svg>
