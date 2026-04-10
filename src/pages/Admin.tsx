@@ -135,9 +135,14 @@ const Admin = () => {
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="font-display text-3xl font-bold text-foreground">Tableau de bord</h1>
-          <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground">
-            <LogOut className="w-4 h-4 mr-2" /> Déconnexion
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" onClick={exportCSV} disabled={responses.length === 0} className="text-muted-foreground">
+              <Download className="w-4 h-4 mr-2" /> Export CSV
+            </Button>
+            <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground">
+              <LogOut className="w-4 h-4 mr-2" /> Déconnexion
+            </Button>
+          </div>
         </div>
 
         {/* Stats */}
