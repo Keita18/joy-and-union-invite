@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { Lock, Users, UserCheck, UserX, MessageSquare, LogOut, Heart, User } from "lucide-react";
+import { Lock, Users, UserCheck, UserX, MessageSquare, LogOut, Heart, User, Download, Trash2 } from "lucide-react";
 
 interface GuestResponse {
   id: string;
@@ -41,6 +41,38 @@ const Admin = () => {
     await supabase.auth.signOut();
     setAuthenticated(false);
     setResponses([]);
+  };
+
+  const handleDelete = async (id: string, name: string) => {
+    if (!confirm(`Supprimer la réponse de "${name}" ?`)) return;
+    const { error } = await supabase.from("guest_responses").delete().eq("id", id);
+    if (error) {
+      toast.error("Erreur lors de la suppression");
+    } else {
+      setResponses((prev) => prev.filter((r) => r.id !== id));
+      toast.success("Réponse supprimée");
+    }
+  };
+
+  const exportCSV = () => {
+    if (responses.length === 0) return;
+    const headers = ["Nom", "Présent", "Accompagné", "Accompagnateur(s)", "Message", "Date"];
+    const rows = responses.map((r) => [
+      r.name,
+      r.attending ? "Oui" : "Non",
+      r.accompanied ? "En couple" : "Seul(e)",
+      r.companion_names || "",
+      r.message || "",
+      new Date(r.created_at).toLocaleDateString("fr-FR"),
+    ]);
+    const csv = [headers, ...rows].map((row) => row.map((c) => `"${c.replace(/"/g, '""')}"`).join(",")).join("\n");
+    const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `invites_${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   useEffect(() => {
@@ -103,9 +135,14 @@ const Admin = () => {
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="font-display text-3xl font-bold text-foreground">Tableau de bord</h1>
-          <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground">
-            <LogOut className="w-4 h-4 mr-2" /> Déconnexion
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" onClick={exportCSV} disabled={responses.length === 0} className="text-muted-foreground">
+              <Download className="w-4 h-4 mr-2" /> Export CSV
+            </Button>
+            <Button variant="ghost" onClick={handleLogout} className="text-muted-foreground">
+              <LogOut className="w-4 h-4 mr-2" /> Déconnexion
+            </Button>
+          </div>
         </div>
 
         {/* Stats */}
@@ -166,6 +203,9 @@ const Admin = () => {
                           {r.accompanied ? "En couple 💕" : "Seul(e) 😉"}
                         </Badge>
                       )}
+                      <Button variant="ghost" size="icon" onClick={() => handleDelete(r.id, r.name)} className="h-8 w-8 text-destructive hover:text-destructive">
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
                     </div>
                   </div>
                 </CardHeader>
