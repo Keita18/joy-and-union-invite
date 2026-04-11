@@ -16,6 +16,8 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         gold: "bg-rose text-primary-foreground hover:bg-rose-dark font-medium shadow-md hover:shadow-lg transition-all",
+        envelope:
+          "bg-envelope text-envelope-foreground hover:bg-envelope/90 font-semibold shadow-lg shadow-envelope/25 ring-2 ring-envelope/35 hover:ring-envelope/55 hover:shadow-xl transition-all [&_svg]:size-5",
       },
       size: {
         default: "h-10 px-4 py-2",

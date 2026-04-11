@@ -41,6 +41,9 @@ All colors MUST be HSL.
     --rose: 350 65% 45%;
     --rose-light: 350 50% 75%;
     --rose-dark: 350 70% 30%;
+    /* Enveloppe / CTA principal (#9d0101) */
+    --envelope: 0 99% 31%;
+    --envelope-foreground: 0 0% 100%;
     --cream: 0 20% 97%;
     --cream-dark: 0 15% 92%;
 

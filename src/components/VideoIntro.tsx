@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface VideoIntroProps {
@@ -24,11 +25,12 @@ const VideoIntro = ({ onContinue }: VideoIntroProps) => {
         <div className="mt-6 animate-fade-in-up shrink-0">
           <Button
             onClick={onContinue}
-            variant="gold"
+            variant="envelope"
             size="lg"
-            className="text-base"
+            className="text-base px-8"
           >
-            Répondre à l'invitation ✉️
+            Répondre à l&apos;invitation
+            <ChevronRight className="size-5 shrink-0 animate-nudge-x" aria-hidden />
           </Button>
         </div>
       )}

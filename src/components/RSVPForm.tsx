@@ -6,19 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "sonner";
-import { Heart, Send } from "lucide-react";
-import roseTopLeft from "@/assets/rose-top-left.png";
-import rosePetals from "@/assets/rose-petals.png";
-import roseBottomRight from "@/assets/rose-bottom-right.png";
-
-const FloralDecor = () => (
-  <>
-    <img src={roseTopLeft} alt="" className="absolute top-0 left-0 w-36 h-36 opacity-30 -rotate-12 pointer-events-none" loading="lazy" width={512} height={512} />
-    <img src={rosePetals} alt="" className="absolute top-0 right-0 w-48 h-48 opacity-20 pointer-events-none" loading="lazy" width={512} height={512} />
-    <img src={roseBottomRight} alt="" className="absolute bottom-0 right-0 w-44 h-44 opacity-25 rotate-12 pointer-events-none" loading="lazy" width={512} height={512} />
-    <img src={rosePetals} alt="" className="absolute bottom-0 left-0 w-40 h-40 opacity-15 rotate-180 pointer-events-none" loading="lazy" width={512} height={512} />
-  </>
-);
+import { ChevronRight, Heart } from "lucide-react";
 const RSVPForm = () => {
   const [name, setName] = useState("");
   const [attending, setAttending] = useState<string>("");
@@ -54,7 +42,6 @@ const RSVPForm = () => {
   if (submitted) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background px-4 relative overflow-hidden">
-        <FloralDecor />
         <div className="text-center animate-fade-in-up max-w-md relative z-10">
           <Heart className="w-16 h-16 mx-auto text-primary mb-6" fill="hsl(var(--rose))" />
           {attending === "yes" ? (
@@ -86,7 +73,6 @@ const RSVPForm = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4 py-12 relative overflow-hidden">
-      <FloralDecor />
       <div className="w-full max-w-lg animate-fade-in-up relative z-10">
         <div className="text-center mb-10">
           <Heart className="w-10 h-10 mx-auto text-primary mb-4" />
@@ -121,11 +107,11 @@ const RSVPForm = () => {
             <RadioGroup value={attending} onValueChange={setAttending} className="flex gap-4">
               <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-primary transition-colors flex-1">
                 <RadioGroupItem value="yes" id="yes" />
-                <Label htmlFor="yes" className="cursor-pointer text-foreground">Oui, avec plaisir 🎉</Label>
+                <Label htmlFor="yes" className="cursor-pointer text-foreground">Oui, avec plaisir</Label>
               </div>
               <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-primary transition-colors flex-1">
                 <RadioGroupItem value="no" id="no" />
-                <Label htmlFor="no" className="cursor-pointer text-foreground">Non, malheureusement 😔</Label>
+                <Label htmlFor="no" className="cursor-pointer text-foreground">Non, malheureusement</Label>
               </div>
             </RadioGroup>
           </div>
@@ -137,21 +123,23 @@ const RSVPForm = () => {
               <RadioGroup value={companionType} onValueChange={setCompanionType} className="flex gap-4">
                 <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-primary transition-colors flex-1">
                   <RadioGroupItem value="couple" id="couple" />
-                  <Label htmlFor="couple" className="cursor-pointer text-foreground">En couple 💕</Label>
+                  <Label htmlFor="couple" className="cursor-pointer text-foreground">En couple</Label>
                 </div>
                 <div className="flex items-center space-x-2 bg-background px-4 py-3 rounded-xl border border-border cursor-pointer hover:border-primary transition-colors flex-1">
                   <RadioGroupItem value="solo" id="solo" />
-                  <Label htmlFor="solo" className="cursor-pointer text-foreground">Seul(e) / singleton 😉</Label>
+                  <Label htmlFor="solo" className="cursor-pointer text-foreground">Seul(e) / singleton</Label>
                 </div>
               </RadioGroup>
             </div>
           )}
 
-          <Button type="submit" variant="gold" size="lg" className="w-full text-base" disabled={submitting}>
-            {submitting ? "Envoi en cours..." : (
+          <Button type="submit" variant="envelope" size="lg" className="w-full text-base justify-center" disabled={submitting}>
+            {submitting ? (
+              "Envoi en cours..."
+            ) : (
               <>
-                <Send className="w-4 h-4 mr-2" />
                 Envoyer ma réponse
+                <ChevronRight className="size-5 shrink-0 animate-nudge-x" aria-hidden />
               </>
             )}
           </Button>
